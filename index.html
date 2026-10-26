@@ -35,7 +35,6 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
         
-        /* Smooth Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -61,13 +60,9 @@
             box-shadow: 0 10px 30px -10px rgba(200, 90, 50, 0.15);
         }
 
-        @keyframes fillBar {
-            from { width: 0%; }
-            to { width: var(--target-width); }
-        }
-
-        .animated-bar {
-            animation: fillBar 1.2s cubic-bezier(0.1, 1, 0.1, 1) forwards;
+        .lang-fill {
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.1, 1, 0.1, 1);
         }
 
         .terminal-glow {
@@ -143,15 +138,15 @@
 
                 <div class="flex items-center gap-2">
                     <span class="text-terracotta font-mono text-xs">$</span>
-                    <input type="text" id="terminal-input" placeholder="try: skills, languages, projects, clear" class="w-full bg-charcoal-900 border border-charcoal-700 rounded px-3 py-1.5 text-xs font-mono text-white focus:outline-none focus:border-terracotta transition-colors">
+                    <input type="text" id="terminal-input" placeholder="try: skills, interests, languages, clear" class="w-full bg-charcoal-900 border border-charcoal-700 rounded px-3 py-1.5 text-xs font-mono text-white focus:outline-none focus:border-terracotta transition-colors">
                     <button onclick="handleTerminalCommand()" class="bg-terracotta hover:bg-terracotta-dark text-white text-xs px-3 py-1.5 rounded transition font-mono active:scale-95">Run</button>
                 </div>
 
                 <div class="flex flex-wrap gap-1.5 mt-3 pt-2 border-t border-charcoal-700/50">
                     <button onclick="runPreset('skills')" class="text-[10px] bg-charcoal-700 hover:bg-charcoal-600 text-gray-300 px-2 py-1 rounded font-mono transition hover:text-white">skills</button>
+                    <button onclick="runPreset('interests')" class="text-[10px] bg-charcoal-700 hover:bg-charcoal-600 text-gray-300 px-2 py-1 rounded font-mono transition hover:text-white">interests</button>
                     <button onclick="runPreset('languages')" class="text-[10px] bg-charcoal-700 hover:bg-charcoal-600 text-gray-300 px-2 py-1 rounded font-mono transition hover:text-white">languages</button>
                     <button onclick="runPreset('projects')" class="text-[10px] bg-charcoal-700 hover:bg-charcoal-600 text-gray-300 px-2 py-1 rounded font-mono transition hover:text-white">projects</button>
-                    <button onclick="runPreset('ideas')" class="text-[10px] bg-charcoal-700 hover:bg-charcoal-600 text-gray-300 px-2 py-1 rounded font-mono transition hover:text-white">ideas</button>
                 </div>
             </div>
         </section>
@@ -171,6 +166,31 @@
                         <span class="text-xs text-gray-400 font-mono">Verified</span>
                     </div>
                     <p class="text-xs text-gray-300 mt-1">Discovered and reported critical security vulnerabilities in Meta and Apple platforms, earning formal official certificates and letters of appreciation.</p>
+                </div>
+            </section>
+
+            <!-- Areas of Interest -->
+            <section class="bg-charcoal-800 border border-charcoal-700 rounded-xl p-5 card-hover">
+                <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light mb-4 flex items-center">
+                    <i class="fa-solid fa-compass mr-2"></i> Areas of Interest
+                </h2>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="bg-charcoal-900 border border-charcoal-700 p-3 rounded-lg flex items-center gap-2">
+                        <i class="fa-solid fa-user-secret text-terracotta"></i>
+                        <span class="text-gray-200 font-medium">Cybersecurity & SecOps</span>
+                    </div>
+                    <div class="bg-charcoal-900 border border-charcoal-700 p-3 rounded-lg flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-terracotta"></i>
+                        <span class="text-gray-200 font-medium">Full-Stack Architecture</span>
+                    </div>
+                    <div class="bg-charcoal-900 border border-charcoal-700 p-3 rounded-lg flex items-center gap-2">
+                        <i class="fa-solid fa-microchip text-terracotta"></i>
+                        <span class="text-gray-200 font-medium">Hardware R&D & IoT</span>
+                    </div>
+                    <div class="bg-charcoal-900 border border-charcoal-700 p-3 rounded-lg flex items-center gap-2">
+                        <i class="fa-solid fa-brain text-terracotta"></i>
+                        <span class="text-gray-200 font-medium">Applied AI Systems</span>
+                    </div>
                 </div>
             </section>
 
@@ -259,7 +279,7 @@
                 </div>
             </section>
 
-            <!-- Languages Section -->
+            <!-- Languages Section (Animated Bars) -->
             <section class="bg-charcoal-800 border border-charcoal-700 rounded-xl p-5 card-hover">
                 <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light mb-4 flex items-center">
                     <i class="fa-solid fa-language mr-2"></i> Languages
@@ -272,7 +292,7 @@
                             <span class="text-terracotta-light">Fluent</span>
                         </div>
                         <div class="w-full bg-charcoal-700 h-2 rounded-full overflow-hidden border border-charcoal-600">
-                            <div class="bg-terracotta h-full rounded-full animated-bar" style="--target-width: 100%;"></div>
+                            <div class="bg-terracotta h-full rounded-full lang-fill" data-width="100%"></div>
                         </div>
                     </div>
 
@@ -282,7 +302,7 @@
                             <span class="text-terracotta-light">Fluent (Native)</span>
                         </div>
                         <div class="w-full bg-charcoal-700 h-2 rounded-full overflow-hidden border border-charcoal-600">
-                            <div class="bg-terracotta h-full rounded-full animated-bar" style="--target-width: 100%;"></div>
+                            <div class="bg-terracotta h-full rounded-full lang-fill" data-width="100%"></div>
                         </div>
                     </div>
 
@@ -292,7 +312,7 @@
                             <span class="text-gray-400">Learning (In Progress)</span>
                         </div>
                         <div class="w-full bg-charcoal-700 h-2 rounded-full overflow-hidden border border-charcoal-600">
-                            <div class="bg-terracotta-light h-full rounded-full opacity-75 animated-bar" style="--target-width: 35%;"></div>
+                            <div class="bg-terracotta-light h-full rounded-full opacity-75 lang-fill" data-width="35%"></div>
                         </div>
                     </div>
                 </div>
@@ -316,17 +336,27 @@
     </div>
 
     <script>
+        // Trigger smooth animated language bars on load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.lang-fill').forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-width');
+                });
+            }, 300);
+        });
+
         const terminalOutput = document.getElementById('terminal-output');
         const terminalInput = document.getElementById('terminal-input');
 
         const responses = {
             'skills': 'Languages & Tech: C++, JavaScript, HTML/CSS | Security: Vulnerability Assessment, Bug Bounties.',
+            'interests': 'Passions: Cybersecurity, Full-Stack Architecture, Hardware Prototyping & R&D, Applied AI.',
             'languages': 'Spoken Languages: English (Fluent), Hindi (Fluent/Native), French (Currently Learning).',
             'projects': 'Clotheset (100k+ downloads) & MOZAI (AI Misinformation Detection Hackathon Finalist).',
             'ideas': 'R&D: OmniCharge Smart Desk (Ambient Wireless Power) & Biometric Lab Security Vault.',
             'bugs': 'Discovered and certified security vulnerabilities for Meta and Apple ecosystems.',
             'education': 'VIT Vellore (CGPA: 9.4) | Manav Sthali School (93.3%, Student Council).',
-            'help': 'Available commands: skills, languages, projects, ideas, bugs, education, clear'
+            'help': 'Available commands: skills, interests, languages, projects, ideas, bugs, education, clear'
         };
 
         function printToTerminal(cmd, res) {
@@ -345,7 +375,7 @@
                 return;
             }
 
-            const res = responses[val] || `Command not found: "${val}". Type "skills", "languages", "projects", or "ideas".`;
+            const res = responses[val] || `Command not found: "${val}". Type "skills", "interests", "languages", or "projects".`;
             printToTerminal(val, res);
             terminalInput.value = '';
         }
