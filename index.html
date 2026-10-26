@@ -159,15 +159,24 @@
             </div>
 
             <!-- Professional Status Bar with Cute Interactive Vibe Widget -->
-            <div class="bg-charcoal-800 card-theme border border-charcoal-700 rounded-xl p-3 mb-4 flex items-center justify-between text-xs reveal-on-scroll relative overflow-visible">
+            <div class="bg-charcoal-800 card-theme border border-charcoal-700 rounded-xl p-3 mb-3 flex items-center justify-between text-xs reveal-on-scroll relative overflow-visible">
                 <div class="flex items-center gap-2 text-gray-300">
                     <i class="fa-solid fa-mug-hot text-terracotta accent-text"></i>
                     <span>Open to SDE & Security Roles</span>
                 </div>
                 <!-- Cute Interactive Heart Counter -->
                 <button onclick="sendLove(event)" id="love-btn" class="relative bg-charcoal-700 hover:bg-charcoal-600 text-terracotta accent-text px-2.5 py-1 rounded-lg font-mono text-[11px] border border-charcoal-600 transition active:scale-90 flex items-center gap-1 cursor-pointer">
-                    <i class="fa-solid fa-heart"></i> <span id="love-count">48</span>
+                    <i class="fa-solid fa-heart"></i> <span id="love-count">52</span>
                 </button>
+            </div>
+
+            <!-- Cute Highlight Banner for Selectors -->
+            <div onclick="openDetailModal('vibe')" class="bg-gradient-to-r from-terracotta/20 to-charcoal-800 border border-terracotta/40 rounded-xl p-2.5 mb-4 text-xs text-gray-300 flex items-center justify-between touch-card reveal-on-scroll">
+                <div class="flex items-center gap-2">
+                    <span class="text-base">💡</span>
+                    <span><strong>Quick Vibe Check:</strong> Why hire Jai? (Tap to read)</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-[10px] text-terracotta accent-text"></i>
             </div>
 
             <!-- Profile Card -->
@@ -303,7 +312,7 @@
                 </div>
             </section>
 
-            <!-- Featured Projects -->
+            <!-- Featured Projects (With Live MOZAI Link) -->
             <section class="bg-charcoal-800 card-theme border border-charcoal-700 rounded-xl p-4 touch-card reveal-on-scroll" onclick="openDetailModal('projects')">
                 <div class="flex justify-between items-center mb-3">
                     <h2 class="text-xs font-semibold uppercase tracking-wider text-terracotta-light accent-text flex items-center">
@@ -323,7 +332,7 @@
 
                     <div class="border-l-2 border-terracotta accent-border pl-3">
                         <div class="flex justify-between items-baseline">
-                            <h3 class="font-semibold text-white text-xs">MOZAI</h3>
+                            <h3 class="font-semibold text-white text-xs">MOZAI <span class="text-terracotta accent-text text-[10px] underline ml-1 font-normal">(Live Demo)</span></h3>
                             <span class="text-[10px] text-gray-400 font-mono">Hackathon Finalist</span>
                         </div>
                         <p class="text-xs text-gray-300 mt-1">AI-powered regional language misinformation detection platform.</p>
@@ -393,7 +402,7 @@
                     <span class="text-xs bg-charcoal-700 text-gray-200 px-2 py-1 rounded font-mono border border-charcoal-600">C++</span>
                     <span class="text-xs bg-charcoal-700 text-gray-200 px-2 py-1 rounded font-mono border border-charcoal-600">JavaScript</span>
                     <span class="text-xs bg-charcoal-700 text-gray-200 px-2.5 py-1 rounded font-mono border border-charcoal-600">HTML/CSS</span>
-                    <span class="text-xs bg-charcoal-700 text-gray-200 px-2.5 py-1 rounded font-mono border border-charcoal-600">Penetration Testing</span>
+                    <span class="text-xs bg-charcoal-700 text-gray-200 px-2 py-1 rounded font-mono border border-charcoal-600">Penetration Testing</span>
                     <span class="text-xs bg-charcoal-700 text-gray-200 px-2.5 py-1 rounded font-mono border border-charcoal-600">Bug Bounties</span>
                     <span class="text-xs bg-charcoal-700 text-gray-200 px-2.5 py-1 rounded font-mono border border-charcoal-600">Full-Stack Dev</span>
                 </div>
@@ -492,12 +501,12 @@
     <script>
         // Cute floating heart counter effect
         function sendLove(event) {
+            event.stopPropagation();
             const btn = document.getElementById('love-btn');
             const countSpan = document.getElementById('love-count');
             let current = parseInt(countSpan.innerText);
             countSpan.innerText = current + 1;
 
-            // Create floating heart element
             const heart = document.createElement('div');
             heart.innerHTML = '<i class="fa-solid fa-heart"></i>';
             heart.className = 'floating-heart text-xs';
@@ -511,6 +520,20 @@
         }
 
         const modalContentData = {
+            'vibe': {
+                title: 'Quick Vibe Check',
+                icon: 'fa-lightbulb',
+                html: `
+                    <div class="space-y-3 text-xs text-gray-300">
+                        <div class="bg-charcoal-900 p-3.5 rounded-xl border border-charcoal-700">
+                            <div class="font-bold text-white mb-1">🚀 High-Impact Engineering</div>
+                            <p class="leading-relaxed mb-2">I combine rigorous academic discipline (9.4 CGPA at VIT Vellore) with real-world execution, scaling software like Clotheset past 100k downloads.</p>
+                            <div class="font-bold text-white mb-1">🛡️ Proven Security Mindset</div>
+                            <p class="leading-relaxed">Bug bounty recognitions from Meta and Apple mean I write secure, resilient code from the ground up.</p>
+                        </div>
+                    </div>
+                `
+            },
             'profile': {
                 title: 'About Me',
                 icon: 'fa-user',
@@ -578,7 +601,10 @@
                                 <span class="font-bold text-white text-sm">MOZAI Platform</span>
                                 <span class="text-[10px] bg-charcoal-700 text-gray-300 px-2 py-0.5 rounded">Hackathon Finalist</span>
                             </div>
-                            <p class="text-gray-400 leading-relaxed">Led our team in building an AI-powered regional language misinformation detection prototype during the ForgeAI hackathon at VIT Vellore, making it all the way to the finals.</p>
+                            <p class="text-gray-400 leading-relaxed mb-3">Led our team in building an AI-powered regional language misinformation detection prototype during the ForgeAI hackathon at VIT Vellore, making it all the way to the finals.</p>
+                            <a href="https://mozai-eq6jw9d2u-mozai.vercel.app/" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-terracotta accent-btn text-white rounded-lg text-xs font-semibold transition hover:opacity-90">
+                                <i class="fa-solid fa-external-link-alt text-[10px]"></i> View Live Demo
+                            </a>
                         </div>
                     </div>
                 `
