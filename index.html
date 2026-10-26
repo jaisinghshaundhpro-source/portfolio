@@ -107,6 +107,21 @@
             box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
         }
 
+        /* Floating Heart Animation */
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.8); opacity: 1; }
+            100% { transform: translateY(-40px) scale(1.3); opacity: 0; }
+        }
+        .floating-heart {
+            position: absolute;
+            animation: floatUp 0.8s ease-out forwards;
+            pointer-events: none;
+            color: #C85A32;
+        }
+        body.cyber-mode .floating-heart {
+            color: #00F0FF;
+        }
+
         /* Modal pop-up animations */
         .modal {
             transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -130,7 +145,7 @@
         <!-- Top Header & Theme Switcher -->
         <header>
             <div class="flex items-center justify-between mb-3">
-                <span id="sys-label" class="text-xs font-mono tracking-wider text-terracotta-light uppercase opacity-90">👋 Hey there, welcome!</span>
+                <span id="sys-label" class="text-xs font-mono tracking-wider text-terracotta-light uppercase opacity-90">👋 Welcome recruiter!</span>
                 
                 <div class="flex items-center gap-2">
                     <!-- Theme Toggle Button -->
@@ -143,13 +158,16 @@
                 </div>
             </div>
 
-            <!-- Friendly Status Bar -->
-            <div class="bg-charcoal-800 card-theme border border-charcoal-700 rounded-xl p-3 mb-4 flex items-center justify-between text-xs reveal-on-scroll">
+            <!-- Professional Status Bar with Cute Interactive Vibe Widget -->
+            <div class="bg-charcoal-800 card-theme border border-charcoal-700 rounded-xl p-3 mb-4 flex items-center justify-between text-xs reveal-on-scroll relative overflow-visible">
                 <div class="flex items-center gap-2 text-gray-300">
                     <i class="fa-solid fa-mug-hot text-terracotta accent-text"></i>
-                    <span>Currently building secure apps & exploring tech</span>
+                    <span>Open to SDE & Security Roles</span>
                 </div>
-                <span class="text-[11px] font-mono text-gray-400">VIT Vellore</span>
+                <!-- Cute Interactive Heart Counter -->
+                <button onclick="sendLove(event)" id="love-btn" class="relative bg-charcoal-700 hover:bg-charcoal-600 text-terracotta accent-text px-2.5 py-1 rounded-lg font-mono text-[11px] border border-charcoal-600 transition active:scale-90 flex items-center gap-1 cursor-pointer">
+                    <i class="fa-solid fa-heart"></i> <span id="love-count">48</span>
+                </button>
             </div>
 
             <!-- Profile Card -->
@@ -236,7 +254,7 @@
             </div>
         </section>
 
-        <!-- Main Content Sections (Click anywhere on a card to explore) -->
+        <!-- Main Content Sections -->
         <main class="space-y-4 flex-1">
 
             <!-- Security & Bug Bounties -->
@@ -472,6 +490,26 @@
     </div>
 
     <script>
+        // Cute floating heart counter effect
+        function sendLove(event) {
+            const btn = document.getElementById('love-btn');
+            const countSpan = document.getElementById('love-count');
+            let current = parseInt(countSpan.innerText);
+            countSpan.innerText = current + 1;
+
+            // Create floating heart element
+            const heart = document.createElement('div');
+            heart.innerHTML = '<i class="fa-solid fa-heart"></i>';
+            heart.className = 'floating-heart text-xs';
+            
+            const rect = btn.getBoundingClientRect();
+            heart.style.left = `${event.clientX - rect.left}px`;
+            heart.style.top = `0px`;
+            
+            btn.appendChild(heart);
+            setTimeout(() => heart.remove(), 800);
+        }
+
         const modalContentData = {
             'profile': {
                 title: 'About Me',
@@ -676,7 +714,7 @@
                 paletteIcon.style.color = '#00F0FF';
             } else {
                 themeText.innerText = 'Terracotta';
-                sysLabel.innerText = '👋 Hey there, welcome!';
+                sysLabel.innerText = '👋 Welcome recruiter!';
                 paletteIcon.style.color = '#C85A32';
             }
         }
