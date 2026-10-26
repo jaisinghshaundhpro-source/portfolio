@@ -279,8 +279,8 @@
                 </div>
             </section>
 
-            <!-- Languages Section (Animated Bars) -->
-            <section class="bg-charcoal-800 border border-charcoal-700 rounded-xl p-5 card-hover">
+            <!-- Languages Section (Scroll-triggered Animation) -->
+            <section id="languages-section" class="bg-charcoal-800 border border-charcoal-700 rounded-xl p-5 card-hover">
                 <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light mb-4 flex items-center">
                     <i class="fa-solid fa-language mr-2"></i> Languages
                 </h2>
@@ -336,13 +336,29 @@
     </div>
 
     <script>
-        // Trigger smooth animated language bars on load
+        // Trigger smooth animated language bars when scrolled into view
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.lang-fill').forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
         window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                document.querySelectorAll('.lang-fill').forEach(bar => {
-                    bar.style.width = bar.getAttribute('data-width');
-                });
-            }, 300);
+            const langSection = document.getElementById('languages-section');
+            if (langSection) {
+                observer.observe(langSection);
+            }
         });
 
         const terminalOutput = document.getElementById('terminal-output');
