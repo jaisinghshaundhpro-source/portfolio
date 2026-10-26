@@ -58,7 +58,7 @@
                 <div class="absolute top-0 right-0 w-32 h-32 bg-terracotta/10 rounded-full blur-2xl pointer-events-none"></div>
                 
                 <div class="flex items-center space-x-4">
-                    <!-- Fixed photo container using object-cover so portrait images fit properly without distortion -->
+                    <!-- Photo container -->
                     <div class="w-20 h-20 rounded-xl overflow-hidden border-2 border-terracotta/40 bg-charcoal-700 flex-shrink-0">
                         <img src="photo.jpg" alt="Jai Singh Shaundh" class="w-full h-full object-cover object-top" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80';">
                     </div>
@@ -107,15 +107,15 @@
 
                 <div class="flex items-center gap-2">
                     <span class="text-terracotta font-mono text-xs">$</span>
-                    <input type="text" id="terminal-input" placeholder="try: skills, projects, ideas, clear" class="w-full bg-charcoal-900 border border-charcoal-700 rounded px-3 py-1.5 text-xs font-mono text-white focus:outline-none focus:border-terracotta">
+                    <input type="text" id="terminal-input" placeholder="try: skills, languages, projects, clear" class="w-full bg-charcoal-900 border border-charcoal-700 rounded px-3 py-1.5 text-xs font-mono text-white focus:outline-none focus:border-terracotta">
                     <button onclick="handleTerminalCommand()" class="bg-terracotta hover:bg-terracotta-dark text-white text-xs px-3 py-1.5 rounded transition font-mono">Run</button>
                 </div>
 
                 <div class="flex flex-wrap gap-1.5 mt-3 pt-2 border-t border-charcoal-700/50">
                     <button onclick="runPreset('skills')" class="text-[10px] bg-charcoal-700 hover:bg-charcoal-600 text-gray-300 px-2 py-1 rounded font-mono">skills</button>
+                    <button onclick="runPreset('languages')" class="text-[10px] bg-charcoal-700 hover:bg-charcoal-600 text-gray-300 px-2 py-1 rounded font-mono">languages</button>
                     <button onclick="runPreset('projects')" class="text-[10px] bg-charcoal-700 hover:bg-charcoal-600 text-gray-300 px-2 py-1 rounded font-mono">projects</button>
                     <button onclick="runPreset('ideas')" class="text-[10px] bg-charcoal-700 hover:bg-charcoal-600 text-gray-300 px-2 py-1 rounded font-mono">ideas</button>
-                    <button onclick="runPreset('bugs')" class="text-[10px] bg-charcoal-700 hover:bg-charcoal-600 text-gray-300 px-2 py-1 rounded font-mono">bugs</button>
                 </div>
             </div>
         </section>
@@ -223,6 +223,45 @@
                 </div>
             </section>
 
+            <!-- Languages Section -->
+            <section class="bg-charcoal-800 border border-charcoal-700 rounded-xl p-5">
+                <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light mb-4 flex items-center">
+                    <i class="fa-solid fa-language mr-2"></i> Languages
+                </h2>
+
+                <div class="space-y-4 text-xs font-mono">
+                    <div>
+                        <div class="flex justify-between mb-1.5">
+                            <span class="text-white font-sans font-medium">English</span>
+                            <span class="text-terracotta-light">Fluent</span>
+                        </div>
+                        <div class="w-full bg-charcoal-700 h-2 rounded-full overflow-hidden border border-charcoal-600">
+                            <div class="bg-terracotta h-full rounded-full" style="width: 100%;"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-1.5">
+                            <span class="text-white font-sans font-medium">Hindi</span>
+                            <span class="text-terracotta-light">Fluent (Native)</span>
+                        </div>
+                        <div class="w-full bg-charcoal-700 h-2 rounded-full overflow-hidden border border-charcoal-600">
+                            <div class="bg-terracotta h-full rounded-full" style="width: 100%;"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-1.5">
+                            <span class="text-white font-sans font-medium">French</span>
+                            <span class="text-gray-400">Learning (In Progress)</span>
+                        </div>
+                        <div class="w-full bg-charcoal-700 h-2 rounded-full overflow-hidden border border-charcoal-600">
+                            <div class="bg-terracotta-light h-full rounded-full opacity-75" style="width: 35%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Heartfelt Closing Note -->
             <section class="bg-charcoal-800 border border-charcoal-700 rounded-xl p-5 text-center">
                 <p class="text-sm text-gray-300 leading-relaxed italic">
@@ -245,12 +284,13 @@
         const terminalInput = document.getElementById('terminal-input');
 
         const responses = {
-            'skills': 'Languages: C++, JavaScript, HTML/CSS | Security: Vulnerability Assessment, Bug Bounties.',
+            'skills': 'Languages & Tech: C++, JavaScript, HTML/CSS | Security: Vulnerability Assessment, Bug Bounties.',
+            'languages': 'Spoken Languages: English (Fluent), Hindi (Fluent/Native), French (Currently Learning).',
             'projects': 'Clotheset (100k+ downloads) & MOZAI (AI Misinformation Detection Hackathon Finalist).',
             'ideas': 'R&D: OmniCharge Smart Desk (Ambient Wireless Power) & Biometric Lab Security Vault.',
             'bugs': 'Discovered and certified security vulnerabilities for Meta and Apple ecosystems.',
             'education': 'VIT Vellore (CGPA: 9.4) | Manav Sthali School (93.3%, Student Council).',
-            'help': 'Available commands: skills, projects, ideas, bugs, education, clear'
+            'help': 'Available commands: skills, languages, projects, ideas, bugs, education, clear'
         };
 
         function printToTerminal(cmd, res) {
@@ -269,7 +309,7 @@
                 return;
             }
 
-            const res = responses[val] || `Command not found: "${val}". Type "skills", "projects", "ideas", or "bugs".`;
+            const res = responses[val] || `Command not found: "${val}". Type "skills", "languages", "projects", or "ideas".`;
             printToTerminal(val, res);
             terminalInput.value = '';
         }
