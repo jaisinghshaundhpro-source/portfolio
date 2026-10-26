@@ -4,54 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jai Singh Shaundh | Cybersecurity & Engineering</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            background-color: #121212;
-            color: #E5E7EB;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        .container {
-            width: 100%;
-            max-width: 440px;
-            background-color: #121212;
-            border-left: 1px solid #1A1A1A;
-            border-right: 1px solid #1A1A1A;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .badge-hire {
-            display: inline-flex;
-            align-items: center;
-            padding: 4px 10px;
-            border-radius: 9999px;
-            font-size: 11px;
-            background-color: #2A201C;
-            color: #E07A53;
-            border: 1px solid rgba(200, 90, 50, 0.3);
-        }
-        .pulse {
-            width: 6px;
-            height: 6px;
-            background-color: #C85A32;
-            border-radius: 50%;
-            margin-right: 6px;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.4; }
-            100% { opacity: 1; }
-        }
-        .card {
-            background-color:
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #121212; color: #E5E7EB; font-family: sans-serif; display: flex; justify-content: center; min-height: 100vh; }
+        .container { width: 100%; max-width: 440px; background-color: #121212; border-left: 1px solid #1A1A1A; border-right: 1px solid #1A1A1A; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; }
+        .card { background-color: #1A1A1A; border: 1px solid #262626; border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+        h1 { font-size: 22px; font-weight: bold; color: #FFFFFF; margin-bottom: 4px; }
+        .title { font-size: 14px; color: #E07A53; font-weight: 500; margin-bottom: 10px; }
+        .bio { font-size: 13px; color: #D1D5DB; line-height: 1.5; margin-top: 10px; }
+        .btn-container { display: flex; gap: 10px; margin-top: 15px; }
+        .btn { flex: 1; padding: 10px; border-radius: 8px; font-size: 12px; font-weight: bold; text-align: center; text-decoration: none; color: white; background-color: #C85A32; display: block; }
+        .section-title { font-size: 12px; font-weight: bold; text-transform: uppercase; color: #E07A53; margin-bottom: 10px; letter-spacing: 0.05em; }
+        .item { border-left: 2px solid #C85A32; padding-left: 10px; margin-bottom: 12px; }
+        .item-title { font-size: 13px; font-weight: bold; color: #ffffff; }
+        .item-desc { font-size: 12px; color: #9CA3AF; margin-top: 2px; }
+        .closing { font-size: 13px; color: #D1D5DB; text-align: center; font-style: italic; line-height: 1.5; }
+        .sign { font-size: 12px; color: #E07A53; text-align: center; font-weight: bold; margin-top: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <!-- Profile Card -->
+            <div class="card">
+                <h1>Jai Singh Shaundh</h1>
+                <div class="title">Cybersecurity Specialist & Dev</div>
+                <div style="font-size: 12px; color: #9CA3AF;">New Delhi / Vellore, India • VIT Vellore CSE (9.4 CGPA)</div>
+                <p class="bio">
+                    Building robust full-stack applications and hunting vulnerabilities. Holding bug bounty recognitions from Meta and Apple.
+                </p>
+                <div class="btn-container">
+                    <a href="https://github.com/jaisinghshaundhpro-source" target="_blank" class="btn">GitHub</a>
+                    <a href="https://www.linkedin.com/in/jai-singh-shaundh-2111b3383" target="_blank" class="btn" style="background-color: #262626;">LinkedIn</a>
+                </div>
+            </div>
+
+            <!-- Highlights -->
+            <div class="card">
+                <div class="section-title">Security & Highlights</div>
+                <div class="item">
+                    <div class="item-title">Meta & Apple Bug Bounties</div>
+                    <div class="item-desc">Discovered and reported critical security vulnerabilities, earning formal official certificates.</div>
+                </div>
+                <div class="item">
+                    <div class="item-title">Clotheset App (100k+ Downloads)</div>
+                    <div class="item-desc">Engineered a cloud wardrobe application scaling past 100k downloads on iOS and Android.</div>
+                </div>
+                <div class="item">
+                    <div class="item-title">MOZAI (Hackathon Finalist)</div>
+                    <div class="item-desc">AI-powered regional language misinformation detection platform at VIT Vellore.</div>
+                </div>
+            </div>
+
+            <!-- R&D Ideas -->
+            <div class="card">
+                <div class="section-title">Upcoming Ideas & R&D</div>
+                <div class="item">
+                    <div class="item-title">OmniCharge Smart Desk</div>
+                    <div class="item-desc">Autonomous magnetic wireless charging desktop system for ambient multi-device power.</div>
+                </div>
+                <div class="item">
+                    <div class="item-title">Biometric Lab Security Vault</div>
+                    <div class="item-desc">Optical fingerprint sensor enclosure prototype for secure laboratory sample storage.</div>
+                </div>
+            </div>
+
+            <!-- Closing -->
+            <div class="card">
+                <p class="closing">
+                    "Thank you so much for stopping by and exploring my work. Building software, securing systems, and bringing creative engineering ideas to life is a journey I deeply love. If you're working on something exciting, my inbox is always open!"
+                </p>
+                <div class="sign">— Jai Singh Shaundh ❤️</div>
+            </div>
+        </div>
+
+        <footer style="text-align: center; font-size: 11px; color: #6B7280; padding: 10px 0;">
+            © 2026 Jai Singh Shaundh
+        </footer>
+    </div>
+</body>
+</html>
