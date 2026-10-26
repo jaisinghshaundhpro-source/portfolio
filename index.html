@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jai Singh Shaundh | Cybersecurity & Engineering</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jai Singh Shaundh | Cybersecurity & Engineering S-Tier Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -22,6 +23,11 @@
                             800: '#1A1A1A',
                             700: '#262626',
                             600: '#383838'
+                        },
+                        cyber: {
+                            primary: '#00F0FF',
+                            bg: '#0A0B10',
+                            card: '#12141C'
                         }
                     }
                 }
@@ -29,75 +35,138 @@
         }
     </script>
     <style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
         body {
             background-color: #121212;
             color: #E5E7EB;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .animate-fade-in {
-            animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        body.cyber-mode {
+            background-color: #0A0B10;
+            color: #E2E8F0;
+        }
+        body.cyber-mode .card-theme {
+            background-color: #12141C !important;
+            border-color: rgba(0, 240, 255, 0.25) !important;
+        }
+        body.cyber-mode .accent-text {
+            color: #00F0FF !important;
+        }
+        body.cyber-mode .accent-btn {
+            background-color: #00F0FF !important;
+            color: #0A0B10 !important;
+        }
+        body.cyber-mode .accent-btn:hover {
+            background-color: #0088CC !important;
         }
 
-        .card-hover {
-            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        /* Mobile Scroll-Reveal Animation */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            will-change: opacity, transform;
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .card-hover:hover {
-            transform: translateY(-3px);
+        /* Tactile Mobile Touch Feedback */
+        .touch-card {
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            cursor: pointer;
+        }
+        .touch-card:active {
+            transform: scale(0.98);
+        }
+        .touch-card:hover {
+            transform: translateY(-2px);
             border-color: rgba(200, 90, 50, 0.4);
-            box-shadow: 0 10px 30px -10px rgba(200, 90, 50, 0.15);
+            box-shadow: 0 8px 20px -8px rgba(200, 90, 50, 0.15);
+        }
+        body.cyber-mode .touch-card:hover {
+            border-color: rgba(0, 240, 255, 0.5);
+            box-shadow: 0 8px 20px -8px rgba(0, 240, 255, 0.2);
         }
 
         .lang-fill {
             width: 0%;
-            transition: width 1.5s cubic-bezier(0.1, 1, 0.1, 1);
+            transition: width 1.4s cubic-bezier(0.1, 1, 0.1, 1);
         }
 
         .terminal-glow {
-            box-shadow: 0 0 25px rgba(200, 90, 50, 0.15);
+            box-shadow: 0 0 20px rgba(200, 90, 50, 0.12);
+        }
+        body.cyber-mode .terminal-glow {
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.12);
+        }
+
+        /* Modal pop-up animations */
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-content {
+            transform: scale(0.95) translateY(10px);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+        .modal.is-open .modal-content {
+            transform: scale(1) translateY(0);
+            opacity: 1;
         }
     </style>
 </head>
-<body class="bg-charcoal-900 text-gray-200 antialiased selection:bg-terracotta selection:text-white">
+<body id="body" class="bg-charcoal-900 text-gray-200 antialiased selection:bg-terracotta selection:text-white">
 
     <!-- Mobile-First Container -->
-    <div class="max-w-md mx-auto min-h-screen bg-charcoal-900 border-x border-charcoal-800 flex flex-col justify-between p-5 sm:p-6 animate-fade-in">
+    <div class="max-w-md mx-auto min-h-screen bg-charcoal-900 card-theme border-x border-charcoal-800 flex flex-col justify-between p-4 sm:p-6 transition-colors duration-300">
 
-        <!-- Top Header & Profile -->
+        <!-- Top Header & Theme Switcher -->
         <header>
-            <div class="flex items-center justify-between mb-6">
-                <span class="text-xs font-mono tracking-widest text-terracotta-light uppercase">SYS.PROFILE // 2026</span>
-                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-terracotta-subtle text-terracotta-light border border-terracotta/30">
-                    <span class="w-1.5 h-1.5 mr-1.5 bg-terracotta rounded-full animate-pulse"></span> Available for Hire
-                </span>
+            <div class="flex items-center justify-between mb-3">
+                <span id="sys-label" class="text-[11px] font-mono tracking-widest text-terracotta-light uppercase">SYS.PROFILE // S-TIER</span>
+                
+                <div class="flex items-center gap-1.5">
+                    <!-- Theme Toggle Button -->
+                    <button onclick="toggleTheme()" id="theme-btn" class="px-2.5 py-1 rounded-full text-xs font-mono bg-charcoal-700 text-gray-300 border border-charcoal-600 hover:border-terracotta transition flex items-center gap-1.5 active:scale-95">
+                        <i class="fa-solid fa-palette text-terracotta" id="palette-icon"></i> <span id="theme-text">Terracotta</span>
+                    </button>
+                    <button onclick="openContactModal()" class="px-2.5 py-1 rounded-full text-xs font-medium bg-terracotta text-white accent-btn transition flex items-center gap-1 shadow-sm active:scale-95">
+                        <i class="fa-solid fa-paper-plane text-[10px]"></i> Contact
+                    </button>
+                </div>
+            </div>
+
+            <!-- Live Status Bar -->
+            <div class="bg-charcoal-800 card-theme border border-charcoal-700 rounded-lg p-2.5 mb-4 flex items-center justify-between text-xs font-mono reveal-on-scroll">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-ping"></span>
+                    <span class="text-gray-300">Status: <span id="status-text" class="text-terracotta-light accent-text">Building Secure Full-Stack Apps</span></span>
+                </div>
+                <span class="text-[10px] text-gray-400">VIT Vellore</span>
             </div>
 
             <!-- Profile Card -->
-            <div class="bg-charcoal-800 border border-charcoal-700 rounded-2xl p-5 mb-6 relative overflow-hidden shadow-lg card-hover">
+            <div class="bg-charcoal-800 card-theme border border-charcoal-700 rounded-2xl p-4 sm:p-5 mb-4 relative overflow-hidden shadow-lg touch-card reveal-on-scroll" onclick="openDetailModal('profile')">
                 <div class="absolute top-0 right-0 w-32 h-32 bg-terracotta/10 rounded-full blur-2xl pointer-events-none"></div>
                 
                 <div class="flex items-center space-x-4">
                     <!-- Photo container -->
-                    <div class="w-20 h-20 rounded-xl overflow-hidden border-2 border-terracotta/40 bg-charcoal-700 flex-shrink-0">
+                    <div class="w-20 h-20 rounded-xl overflow-hidden border-2 border-terracotta/40 accent-border bg-charcoal-700 flex-shrink-0">
                         <img src="photo.jpg" alt="Jai Singh Shaundh" class="w-full h-full object-cover object-top" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80';">
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold text-white tracking-tight">Jai Singh Shaundh</h1>
-                        <p class="text-sm text-terracotta-light font-medium mt-0.5">Cybersecurity Specialist & Dev</p>
+                        <h1 class="text-xl font-bold text-white tracking-tight flex items-center gap-2">
+                            Jai Singh Shaundh <i class="fa-solid fa-circle-info text-xs text-terracotta accent-text opacity-60"></i>
+                        </h1>
+                        <p class="text-sm text-terracotta-light accent-text font-medium mt-0.5">Cybersecurity Specialist & Dev</p>
                         <p class="text-xs text-gray-400 mt-1 flex items-center">
-                            <i class="fa-solid fa-location-dot mr-1 text-terracotta"></i> New Delhi / Vellore, India
+                            <i class="fa-solid fa-location-dot mr-1 text-terracotta accent-text"></i> New Delhi / Vellore, India
                         </p>
                     </div>
                 </div>
@@ -106,12 +175,28 @@
                     Building robust full-stack applications and hunting vulnerabilities. 4th-year CSE at VIT Vellore with a 9.4 CGPA, holding bug bounty recognitions from Meta and Apple.
                 </p>
 
-                <!-- Social Links -->
-                <div class="flex items-center gap-3 mt-5 pt-4 border-t border-charcoal-700">
-                    <a href="https://github.com/jaisinghshaundhpro-source" target="_blank" class="flex-1 bg-charcoal-700 hover:bg-charcoal-600 text-gray-200 text-xs font-medium py-2 px-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 hover:scale-[1.02]">
+                <!-- Quick Stats Grid -->
+                <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-charcoal-700 text-center font-mono">
+                    <div class="bg-charcoal-900/50 p-2 rounded-lg border border-charcoal-700">
+                        <div class="text-sm font-bold text-white accent-text">9.4</div>
+                        <div class="text-[10px] text-gray-400">CGPA</div>
+                    </div>
+                    <div class="bg-charcoal-900/50 p-2 rounded-lg border border-charcoal-700">
+                        <div class="text-sm font-bold text-white accent-text">100k+</div>
+                        <div class="text-[10px] text-gray-400">Downloads</div>
+                    </div>
+                    <div class="bg-charcoal-900/50 p-2 rounded-lg border border-charcoal-700">
+                        <div class="text-sm font-bold text-white accent-text">Meta/Apple</div>
+                        <div class="text-[10px] text-gray-400">Bounties</div>
+                    </div>
+                </div>
+
+                <!-- Social Links (prevent modal trigger on click) -->
+                <div class="flex items-center gap-3 mt-4 pt-4 border-t border-charcoal-700" onclick="event.stopPropagation()">
+                    <a href="https://github.com/jaisinghshaundhpro-source" target="_blank" class="flex-1 bg-charcoal-700 hover:bg-charcoal-600 text-gray-200 text-xs font-medium py-2 px-3 rounded-lg transition flex items-center justify-center gap-2 active:scale-95">
                         <i class="fa-brands fa-github text-sm"></i> GitHub
                     </a>
-                    <a href="https://www.linkedin.com/in/jai-singh-shaundh-2111b3383" target="_blank" class="flex-1 bg-terracotta hover:bg-terracotta-dark text-white text-xs font-medium py-2 px-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 hover:scale-[1.02]">
+                    <a href="https://www.linkedin.com/in/jai-singh-shaundh-2111b3383" target="_blank" class="flex-1 bg-terracotta hover:bg-terracotta-dark text-white text-xs font-medium py-2 px-3 rounded-lg transition flex items-center justify-center gap-2 accent-btn active:scale-95">
                         <i class="fa-brands fa-linkedin text-sm"></i> LinkedIn
                     </a>
                 </div>
@@ -119,8 +204,8 @@
         </header>
 
         <!-- Interactive Terminal -->
-        <section class="mb-6">
-            <div class="bg-charcoal-800 border border-charcoal-700 rounded-xl p-4 terminal-glow card-hover">
+        <section class="mb-4 reveal-on-scroll">
+            <div class="bg-charcoal-800 card-theme border border-charcoal-700 rounded-xl p-4 terminal-glow">
                 <div class="flex items-center justify-between pb-2 mb-3 border-b border-charcoal-700">
                     <div class="flex items-center space-x-2">
                         <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
@@ -128,18 +213,18 @@
                         <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
                         <span class="text-xs font-mono text-gray-400 ml-2">terminal@jai-sec:~</span>
                     </div>
-                    <span class="text-[10px] font-mono text-terracotta-light bg-terracotta-subtle px-2 py-0.5 rounded">bash</span>
+                    <span class="text-[10px] font-mono text-terracotta-light accent-text bg-terracotta-subtle px-2 py-0.5 rounded">bash</span>
                 </div>
                 
                 <div id="terminal-output" class="text-xs font-mono text-gray-300 space-y-1 mb-3 max-h-32 overflow-y-auto">
-                    <p class="text-terracotta-light">&gt; Initializing secure shell...</p>
+                    <p class="text-terracotta-light accent-text">&gt; Initializing secure shell...</p>
                     <p>&gt; Type a command or click suggestions below.</p>
                 </div>
 
                 <div class="flex items-center gap-2">
-                    <span class="text-terracotta font-mono text-xs">$</span>
+                    <span class="text-terracotta accent-text font-mono text-xs">$</span>
                     <input type="text" id="terminal-input" placeholder="try: skills, interests, languages, clear" class="w-full bg-charcoal-900 border border-charcoal-700 rounded px-3 py-1.5 text-xs font-mono text-white focus:outline-none focus:border-terracotta transition-colors">
-                    <button onclick="handleTerminalCommand()" class="bg-terracotta hover:bg-terracotta-dark text-white text-xs px-3 py-1.5 rounded transition font-mono active:scale-95">Run</button>
+                    <button onclick="handleTerminalCommand()" class="bg-terracotta hover:bg-terracotta-dark text-white text-xs px-3 py-1.5 rounded transition font-mono active:scale-95 accent-btn">Run</button>
                 </div>
 
                 <div class="flex flex-wrap gap-1.5 mt-3 pt-2 border-t border-charcoal-700/50">
@@ -151,18 +236,21 @@
             </div>
         </section>
 
-        <!-- Main Content Sections -->
-        <main class="space-y-6 flex-1">
+        <!-- Main Content Sections (All Clickable for Popup View) -->
+        <main class="space-y-4 flex-1">
 
             <!-- Security & Bug Bounties -->
-            <section class="bg-charcoal-800 border border-charcoal-700 rounded-xl p-5 card-hover">
-                <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light mb-4 flex items-center">
-                    <i class="fa-solid fa-shield-halved mr-2"></i> Security & Bug Bounties
-                </h2>
+            <section class="bg-charcoal-800 card-theme border border-charcoal-700 rounded-xl p-4 touch-card reveal-on-scroll" onclick="openDetailModal('security')">
+                <div class="flex justify-between items-center mb-2">
+                    <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light accent-text flex items-center">
+                        <i class="fa-solid fa-shield-halved mr-2"></i> Security & Bug Bounties
+                    </h2>
+                    <span class="text-[10px] font-mono text-gray-400 bg-charcoal-900 px-2 py-0.5 rounded border border-charcoal-700">Tap to expand <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></span>
+                </div>
 
-                <div class="border-l-2 border-terracotta pl-3">
+                <div class="border-l-2 border-terracotta accent-border pl-3">
                     <div class="flex justify-between items-baseline">
-                        <h3 class="font-semibold text-white">Meta & Apple Recognitions</h3>
+                        <h3 class="font-semibold text-white text-sm">Meta & Apple Recognitions</h3>
                         <span class="text-xs text-gray-400 font-mono">Verified</span>
                     </div>
                     <p class="text-xs text-gray-300 mt-1">Discovered and reported critical security vulnerabilities in Meta and Apple platforms, earning formal official certificates and letters of appreciation.</p>
@@ -170,197 +258,488 @@
             </section>
 
             <!-- Areas of Interest -->
-            <section class="bg-charcoal-800 border border-charcoal-700 rounded-xl p-5 card-hover">
-                <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light mb-4 flex items-center">
-                    <i class="fa-solid fa-compass mr-2"></i> Areas of Interest
-                </h2>
+            <section class="bg-charcoal-800 card-theme border border-charcoal-700 rounded-xl p-4 touch-card reveal-on-scroll" onclick="openDetailModal('interests')">
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light accent-text flex items-center">
+                        <i class="fa-solid fa-compass mr-2"></i> Areas of Interest
+                    </h2>
+                    <span class="text-[10px] font-mono text-gray-400 bg-charcoal-900 px-2 py-0.5 rounded border border-charcoal-700">Tap to expand <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></span>
+                </div>
                 <div class="grid grid-cols-2 gap-2 text-xs">
-                    <div class="bg-charcoal-900 border border-charcoal-700 p-3 rounded-lg flex items-center gap-2">
-                        <i class="fa-solid fa-user-secret text-terracotta"></i>
-                        <span class="text-gray-200 font-medium">Cybersecurity & SecOps</span>
+                    <div class="bg-charcoal-900 border border-charcoal-700 p-2.5 rounded-lg flex items-center gap-2">
+                        <i class="fa-solid fa-user-secret text-terracotta accent-text"></i>
+                        <span class="text-gray-200 font-medium">Cybersecurity</span>
                     </div>
-                    <div class="bg-charcoal-900 border border-charcoal-700 p-3 rounded-lg flex items-center gap-2">
-                        <i class="fa-solid fa-layer-group text-terracotta"></i>
-                        <span class="text-gray-200 font-medium">Full-Stack Architecture</span>
+                    <div class="bg-charcoal-900 border border-charcoal-700 p-2.5 rounded-lg flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-terracotta accent-text"></i>
+                        <span class="text-gray-200 font-medium">Full-Stack</span>
                     </div>
-                    <div class="bg-charcoal-900 border border-charcoal-700 p-3 rounded-lg flex items-center gap-2">
-                        <i class="fa-solid fa-microchip text-terracotta"></i>
-                        <span class="text-gray-200 font-medium">Hardware R&D & IoT</span>
+                    <div class="bg-charcoal-900 border border-charcoal-700 p-2.5 rounded-lg flex items-center gap-2">
+                        <i class="fa-solid fa-microchip text-terracotta accent-text"></i>
+                        <span class="text-gray-200 font-medium">Hardware R&D</span>
                     </div>
-                    <div class="bg-charcoal-900 border border-charcoal-700 p-3 rounded-lg flex items-center gap-2">
-                        <i class="fa-solid fa-brain text-terracotta"></i>
-                        <span class="text-gray-200 font-medium">Applied AI Systems</span>
+                    <div class="bg-charcoal-900 border border-charcoal-700 p-2.5 rounded-lg flex items-center gap-2">
+                        <i class="fa-solid fa-brain text-terracotta accent-text"></i>
+                        <span class="text-gray-200 font-medium">Applied AI</span>
                     </div>
                 </div>
             </section>
 
             <!-- Featured Projects -->
-            <section class="bg-charcoal-800 border border-charcoal-700 rounded-xl p-5 card-hover">
-                <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light mb-4 flex items-center">
-                    <i class="fa-solid fa-laptop-code mr-2"></i> Featured Projects
-                </h2>
+            <section class="bg-charcoal-800 card-theme border border-charcoal-700 rounded-xl p-4 touch-card reveal-on-scroll" onclick="openDetailModal('projects')">
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light accent-text flex items-center">
+                        <i class="fa-solid fa-laptop-code mr-2"></i> Featured Projects
+                    </h2>
+                    <span class="text-[10px] font-mono text-gray-400 bg-charcoal-900 px-2 py-0.5 rounded border border-charcoal-700">Tap to expand <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></span>
+                </div>
 
-                <div class="space-y-4 text-sm">
-                    <div class="border-l-2 border-terracotta pl-3">
+                <div class="space-y-3 text-sm">
+                    <div class="border-l-2 border-terracotta accent-border pl-3">
                         <div class="flex justify-between items-baseline">
-                            <h3 class="font-semibold text-white">Clotheset App</h3>
-                            <span class="text-xs text-terracotta-light font-mono">100k+ Downloads</span>
+                            <h3 class="font-semibold text-white text-xs">Clotheset App</h3>
+                            <span class="text-[10px] text-terracotta-light accent-text font-mono">100k+ Downloads</span>
                         </div>
-                        <p class="text-xs text-gray-300 mt-1">Engineered a cloud wardrobe application for students to curate clothing based on schedules and occasions, scaling past 100,000 downloads on iOS and Android.</p>
+                        <p class="text-xs text-gray-300 mt-1">Cloud wardrobe application for students scaling past 100,000 downloads on iOS and Android.</p>
                     </div>
 
-                    <div class="border-l-2 border-terracotta pl-3">
+                    <div class="border-l-2 border-terracotta accent-border pl-3">
                         <div class="flex justify-between items-baseline">
-                            <h3 class="font-semibold text-white">MOZAI</h3>
-                            <span class="text-xs text-gray-400 font-mono">Hackathon Finalist</span>
+                            <h3 class="font-semibold text-white text-xs">MOZAI</h3>
+                            <span class="text-[10px] text-gray-400 font-mono">Hackathon Finalist</span>
                         </div>
-                        <p class="text-xs text-gray-300 mt-1">Led team development for an AI-powered regional language misinformation and news detection platform during the ForgeAI hackathon at VIT Vellore.</p>
+                        <p class="text-xs text-gray-300 mt-1">AI-powered regional language misinformation detection platform at VIT Vellore.</p>
                     </div>
                 </div>
             </section>
 
             <!-- Upcoming Ideas & Hardware R&D -->
-            <section class="bg-charcoal-800 border border-charcoal-700 rounded-xl p-5 card-hover">
-                <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light mb-4 flex items-center">
-                    <i class="fa-solid fa-lightbulb mr-2"></i> Upcoming Ideas & R&D
-                </h2>
+            <section class="bg-charcoal-800 card-theme border border-charcoal-700 rounded-xl p-4 touch-card reveal-on-scroll" onclick="openDetailModal('ideas')">
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light accent-text flex items-center">
+                        <i class="fa-solid fa-lightbulb mr-2"></i> Upcoming Ideas & R&D
+                    </h2>
+                    <span class="text-[10px] font-mono text-gray-400 bg-charcoal-900 px-2 py-0.5 rounded border border-charcoal-700">Tap to expand <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></span>
+                </div>
 
-                <div class="space-y-4 text-sm">
-                    <div class="border-l-2 border-terracotta-light pl-3">
-                        <h3 class="font-semibold text-white">OmniCharge Smart Desk</h3>
-                        <p class="text-xs text-gray-300 mt-1">Conceptualizing an autonomous magnetic wireless charging desktop system designed for seamless ambient multi-device power delivery.</p>
+                <div class="space-y-3 text-sm">
+                    <div class="border-l-2 border-terracotta-light accent-border pl-3">
+                        <h3 class="font-semibold text-white text-xs">OmniCharge Smart Desk</h3>
+                        <p class="text-xs text-gray-300 mt-1">Autonomous magnetic wireless charging desktop system for ambient power delivery.</p>
                     </div>
 
-                    <div class="border-l-2 border-terracotta-light pl-3">
-                        <h3 class="font-semibold text-white">Biometric Lab Security Vault</h3>
-                        <p class="text-xs text-gray-300 mt-1">Developing an optical fingerprint sensor-secured hardware enclosure prototype integrated with microcontrollers for sensitive laboratory sample storage.</p>
+                    <div class="border-l-2 border-terracotta-light accent-border pl-3">
+                        <h3 class="font-semibold text-white text-xs">Biometric Lab Security Vault</h3>
+                        <p class="text-xs text-gray-300 mt-1">Optical fingerprint sensor-secured hardware enclosure for sensitive lab samples.</p>
                     </div>
                 </div>
             </section>
 
             <!-- Education & Leadership -->
-            <section class="bg-charcoal-800 border border-charcoal-700 rounded-xl p-5 card-hover">
-                <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light mb-4 flex items-center">
-                    <i class="fa-solid fa-graduation-cap mr-2"></i> Education & Leadership
-                </h2>
+            <section class="bg-charcoal-800 card-theme border border-charcoal-700 rounded-xl p-4 touch-card reveal-on-scroll" onclick="openDetailModal('education')">
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light accent-text flex items-center">
+                        <i class="fa-solid fa-graduation-cap mr-2"></i> Education & Leadership
+                    </h2>
+                    <span class="text-[10px] font-mono text-gray-400 bg-charcoal-900 px-2 py-0.5 rounded border border-charcoal-700">Tap to expand <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></span>
+                </div>
 
-                <div class="space-y-4 text-sm">
+                <div class="space-y-3 text-sm">
                     <div>
                         <div class="flex justify-between items-baseline">
-                            <h3 class="font-semibold text-white">VIT Vellore</h3>
-                            <span class="text-xs font-mono text-terracotta-light">CGPA: 9.4</span>
+                            <h3 class="font-semibold text-white text-xs">VIT Vellore</h3>
+                            <span class="text-xs font-mono text-terracotta-light accent-text">CGPA: 9.4</span>
                         </div>
                         <p class="text-xs text-gray-400">B.Tech in Computer Science / IT (2022 - 2026)</p>
                     </div>
 
-                    <div class="pt-3 border-t border-charcoal-700">
+                    <div class="pt-2 border-t border-charcoal-700">
                         <div class="flex justify-between items-baseline">
-                            <h3 class="font-semibold text-white">Manav Sthali School</h3>
-                            <span class="text-xs font-mono text-terracotta-light">93.3%</span>
+                            <h3 class="font-semibold text-white text-xs">Manav Sthali School</h3>
+                            <span class="text-xs font-mono text-terracotta-light accent-text">93.3%</span>
                         </div>
-                        <p class="text-xs text-gray-400">Middle & High School</p>
-                        <p class="text-xs text-gray-300 mt-1 font-medium text-terracotta-light">Student Council Member (Grades 11 & 12) & School Management Team</p>
+                        <p class="text-xs text-gray-300 mt-0.5">Student Council Member (Grades 11 & 12) & School Management Team</p>
                     </div>
                 </div>
             </section>
 
             <!-- Core Skills -->
-            <section class="bg-charcoal-800 border border-charcoal-700 rounded-xl p-5 card-hover">
-                <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light mb-3 flex items-center">
-                    <i class="fa-solid fa-code mr-2"></i> Tech Stack & Skills
-                </h2>
-                <div class="flex flex-wrap gap-2 pt-1">
-                    <span class="text-xs bg-charcoal-700 text-gray-200 px-2.5 py-1 rounded font-mono border border-charcoal-600 transition hover:bg-charcoal-600 hover:border-terracotta">C++</span>
-                    <span class="text-xs bg-charcoal-700 text-gray-200 px-2.5 py-1 rounded font-mono border border-charcoal-600 transition hover:bg-charcoal-600 hover:border-terracotta">JavaScript</span>
-                    <span class="text-xs bg-charcoal-700 text-gray-200 px-2.5 py-1 rounded font-mono border border-charcoal-600 transition hover:bg-charcoal-600 hover:border-terracotta">HTML/CSS</span>
-                    <span class="text-xs bg-charcoal-700 text-gray-200 px-2.5 py-1 rounded font-mono border border-charcoal-600 transition hover:bg-charcoal-600 hover:border-terracotta">Penetration Testing</span>
-                    <span class="text-xs bg-charcoal-700 text-gray-200 px-2.5 py-1 rounded font-mono border border-charcoal-600 transition hover:bg-charcoal-600 hover:border-terracotta">Bug Bounties</span>
-                    <span class="text-xs bg-charcoal-700 text-gray-200 px-2.5 py-1 rounded font-mono border border-charcoal-600 transition hover:bg-charcoal-600 hover:border-terracotta">Full-Stack Dev</span>
+            <section class="bg-charcoal-800 card-theme border border-charcoal-700 rounded-xl p-4 touch-card reveal-on-scroll" onclick="openDetailModal('skills')">
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light accent-text flex items-center">
+                        <i class="fa-solid fa-code mr-2"></i> Tech Stack & Skills
+                    </h2>
+                    <span class="text-[10px] font-mono text-gray-400 bg-charcoal-900 px-2 py-0.5 rounded border border-charcoal-700">Tap to expand <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></span>
+                </div>
+                <div class="flex flex-wrap gap-1.5 pt-1">
+                    <span class="text-xs bg-charcoal-700 text-gray-200 px-2 py-1 rounded font-mono border border-charcoal-600">C++</span>
+                    <span class="text-xs bg-charcoal-700 text-gray-200 px-2 py-1 rounded font-mono border border-charcoal-600">JavaScript</span>
+                    <span class="text-xs bg-charcoal-700 text-gray-200 px-2.5 py-1 rounded font-mono border border-charcoal-600">HTML/CSS</span>
+                    <span class="text-xs bg-charcoal-700 text-gray-200 px-2.5 py-1 rounded font-mono border border-charcoal-600">Penetration Testing</span>
+                    <span class="text-xs bg-charcoal-700 text-gray-200 px-2.5 py-1 rounded font-mono border border-charcoal-600">Bug Bounties</span>
+                    <span class="text-xs bg-charcoal-700 text-gray-200 px-2.5 py-1 rounded font-mono border border-charcoal-600">Full-Stack Dev</span>
                 </div>
             </section>
 
-            <!-- Languages Section (Scroll-triggered Animation) -->
-            <section id="languages-section" class="bg-charcoal-800 border border-charcoal-700 rounded-xl p-5 card-hover">
-                <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light mb-4 flex items-center">
-                    <i class="fa-solid fa-language mr-2"></i> Languages
-                </h2>
+            <!-- Languages Section -->
+            <section id="languages-section" class="bg-charcoal-800 card-theme border border-charcoal-700 rounded-xl p-4 touch-card reveal-on-scroll" onclick="openDetailModal('languages')">
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="text-sm font-semibold uppercase tracking-wider text-terracotta-light accent-text flex items-center">
+                        <i class="fa-solid fa-language mr-2"></i> Languages
+                    </h2>
+                    <span class="text-[10px] font-mono text-gray-400 bg-charcoal-900 px-2 py-0.5 rounded border border-charcoal-700">Tap to expand <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></span>
+                </div>
 
-                <div class="space-y-4 text-xs font-mono">
+                <div class="space-y-3 text-xs font-mono">
                     <div>
-                        <div class="flex justify-between mb-1.5">
+                        <div class="flex justify-between mb-1">
                             <span class="text-white font-sans font-medium">English</span>
-                            <span class="text-terracotta-light">Fluent</span>
+                            <span class="text-terracotta-light accent-text">Fluent</span>
                         </div>
                         <div class="w-full bg-charcoal-700 h-2 rounded-full overflow-hidden border border-charcoal-600">
-                            <div class="bg-terracotta h-full rounded-full lang-fill" data-width="100%"></div>
+                            <div class="bg-terracotta accent-bg h-full rounded-full lang-fill" data-width="100%"></div>
                         </div>
                     </div>
 
                     <div>
-                        <div class="flex justify-between mb-1.5">
+                        <div class="flex justify-between mb-1">
                             <span class="text-white font-sans font-medium">Hindi</span>
-                            <span class="text-terracotta-light">Fluent (Native)</span>
+                            <span class="text-terracotta-light accent-text">Fluent (Native)</span>
                         </div>
                         <div class="w-full bg-charcoal-700 h-2 rounded-full overflow-hidden border border-charcoal-600">
-                            <div class="bg-terracotta h-full rounded-full lang-fill" data-width="100%"></div>
+                            <div class="bg-terracotta accent-bg h-full rounded-full lang-fill" data-width="100%"></div>
                         </div>
                     </div>
 
                     <div>
-                        <div class="flex justify-between mb-1.5">
+                        <div class="flex justify-between mb-1">
                             <span class="text-white font-sans font-medium">French</span>
                             <span class="text-gray-400">Learning (In Progress)</span>
                         </div>
                         <div class="w-full bg-charcoal-700 h-2 rounded-full overflow-hidden border border-charcoal-600">
-                            <div class="bg-terracotta-light h-full rounded-full opacity-75 lang-fill" data-width="35%"></div>
+                            <div class="bg-terracotta-light accent-bg h-full rounded-full opacity-75 lang-fill" data-width="35%"></div>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Heartfelt Closing Note -->
-            <section class="bg-charcoal-800 border border-charcoal-700 rounded-xl p-5 text-center card-hover">
-                <p class="text-sm text-gray-300 leading-relaxed italic">
-                    "Thank you so much for stopping by and exploring my work. Building software, securing systems, and bringing creative engineering ideas to life is a journey I deeply love. If you're working on something exciting or just want to connect over code and security, my inbox is always open!"
+            <section class="bg-charcoal-800 card-theme border border-charcoal-700 rounded-xl p-4 text-center touch-card reveal-on-scroll" onclick="openDetailModal('closing')">
+                <p class="text-xs text-gray-300 leading-relaxed italic">
+                    "Thank you so much for stopping by and exploring my work. Building software, securing systems, and bringing creative engineering ideas to life is a journey I deeply love..."
                 </p>
-                <p class="text-xs text-terracotta-light font-semibold mt-3">— Jai Singh Shaundh ❤️</p>
+                <p class="text-[11px] text-terracotta-light accent-text font-semibold mt-2">— Jai Singh Shaundh ❤️ <span class="text-[9px] text-gray-400 block font-normal">(Tap to read full note)</span></p>
             </section>
 
         </main>
 
         <!-- Footer -->
-        <footer class="mt-8 pt-4 border-t border-charcoal-800 text-center text-xs text-gray-500 font-mono">
-            <p>© 2026 Jai Singh Shaundh. Built with clean code & passion.</p>
+        <footer class="mt-6 pt-3 border-t border-charcoal-800 text-center text-[11px] text-gray-500 font-mono">
+            <p>© 2026 Jai Singh Shaundh. Built with S-tier mobile animation.</p>
         </footer>
 
     </div>
 
+    <!-- Interactive Detail Pop-up Modal -->
+    <div id="detail-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none modal">
+        <div class="bg-charcoal-800 card-theme border border-charcoal-700 w-full max-w-md rounded-2xl p-5 sm:p-6 relative shadow-2xl modal-content max-h-[85vh] overflow-y-auto">
+            <button onclick="closeDetailModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white bg-charcoal-700 w-8 h-8 rounded-full flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modal-body" class="space-y-4">
+                <!-- Dynamically injected content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal Drawer -->
+    <div id="contact-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none modal">
+        <div class="bg-charcoal-800 card-theme border border-charcoal-700 w-full max-w-sm rounded-2xl p-6 relative shadow-2xl modal-content">
+            <button onclick="closeContactModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="text-base font-bold text-white mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-paper-plane text-terracotta accent-text"></i> Send a Message
+            </h3>
+            <p class="text-xs text-gray-400 mb-4">Drop a note or collaborate on security/dev projects!</p>
+            
+            <div class="space-y-3">
+                <input type="text" id="visitor-name" placeholder="Your Name" class="w-full bg-charcoal-900 border border-charcoal-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-terracotta">
+                <textarea id="visitor-msg" rows="3" placeholder="Your Message..." class="w-full bg-charcoal-900 border border-charcoal-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-terracotta"></textarea>
+                <button onclick="sendMsg()" class="w-full bg-terracotta accent-btn text-white text-xs font-semibold py-2.5 rounded-lg transition active:scale-95">Send via Email</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Trigger smooth animated language bars when scrolled into view
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
+        // Detailed Content Bank for Popup Modals
+        const modalContentData = {
+            'profile': {
+                title: 'Professional Profile',
+                icon: 'fa-user-astronaut',
+                html: `
+                    <div class="text-center mb-4">
+                        <div class="w-24 h-24 rounded-2xl overflow-hidden border-2 border-terracotta mx-auto mb-3">
+                            <img src="photo.jpg" alt="Jai Singh Shaundh" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80'">
+                        </div>
+                        <h4 class="text-lg font-bold text-white">Jai Singh Shaundh</h4>
+                        <p class="text-xs text-terracotta-light accent-text">Cybersecurity Specialist & Full-Stack Developer</p>
+                    </div>
+                    <p class="text-xs text-gray-300 leading-relaxed">I am a 4th-year Computer Science Engineering student at VIT Vellore maintaining a 9.4 CGPA. My core expertise spans vulnerability assessment, penetration testing, and scalable application development. I have successfully identified security vulnerabilities for tech giants like Meta and Apple.</p>
+                `
+            },
+            'security': {
+                title: 'Security & Bug Bounties',
+                icon: 'fa-shield-halved',
+                html: `
+                    <div class="space-y-3 text-xs text-gray-300">
+                        <div class="bg-charcoal-900 p-3 rounded-xl border border-charcoal-700">
+                            <div class="font-bold text-white mb-1">Meta & Apple Platform Vulnerabilities</div>
+                            <p>Discovered and responsibly reported security flaws affecting ecosystem endpoints. Received formal recognition certificates and letters of appreciation from security engineering teams.</p>
+                        </div>
+                        <div class="bg-charcoal-900 p-3 rounded-xl border border-charcoal-700">
+                            <div class="font-bold text-white mb-1">Penetration Testing & SecOps</div>
+                            <p>Active practitioner of vulnerability research, web application security hardening, and exploit analysis.</p>
+                        </div>
+                    </div>
+                `
+            },
+            'interests': {
+                title: 'Areas of Interest & Passions',
+                icon: 'fa-compass',
+                html: `
+                    <div class="grid grid-cols-1 gap-2.5 text-xs">
+                        <div class="bg-charcoal-900 p-3 rounded-xl border border-charcoal-700">
+                            <div class="font-bold text-white mb-0.5 flex items-center gap-2"><i class="fa-solid fa-user-secret text-terracotta accent-text"></i> Cybersecurity & SecOps</div>
+                            <p class="text-gray-400">Deep diving into secure coding practices, cryptography, and offensive/defensive security mechanics.</p>
+                        </div>
+                        <div class="bg-charcoal-900 p-3 rounded-xl border border-charcoal-700">
+                            <div class="font-bold text-white mb-0.5 flex items-center gap-2"><i class="fa-solid fa-layer-group text-terracotta accent-text"></i> Full-Stack Architecture</div>
+                            <p class="text-gray-400">Building lightning-fast, zero-dependency web applications and scalable cloud-backed mobile apps.</p>
+                        </div>
+                        <div class="bg-charcoal-900 p-3 rounded-xl border border-charcoal-700">
+                            <div class="font-bold text-white mb-0.5 flex items-center gap-2"><i class="fa-solid fa-microchip text-terracotta accent-text"></i> Hardware Prototyping & R&D</div>
+                            <p class="text-gray-400">Designing smart desk hardware ecosystems, wireless power transfer, and microcontroller vaults.</p>
+                        </div>
+                        <div class="bg-charcoal-900 p-3 rounded-xl border border-charcoal-700">
+                            <div class="font-bold text-white mb-0.5 flex items-center gap-2"><i class="fa-solid fa-brain text-terracotta accent-text"></i> Applied Artificial Intelligence</div>
+                            <p class="text-gray-400">Integrating LLM APIs and building AI tools like MOZAI for regional misinformation detection.</p>
+                        </div>
+                    </div>
+                `
+            },
+            'projects': {
+                title: 'Featured Projects',
+                icon: 'fa-laptop-code',
+                html: `
+                    <div class="space-y-3 text-xs text-gray-300">
+                        <div class="bg-charcoal-900 p-3.5 rounded-xl border border-charcoal-700">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-white text-sm">Clotheset Application</span>
+                                <span class="text-[10px] bg-terracotta-subtle text-terracotta-light accent-text px-2 py-0.5 rounded">100k+ Downloads</span>
+                            </div>
+                            <p class="text-gray-400 leading-relaxed">Engineered a comprehensive cloud wardrobe application enabling students to curate outfits based on weather, schedule, and occasions. Scaled organically to cross over 100,000 active downloads across iOS and Android app stores.</p>
+                        </div>
+                        <div class="bg-charcoal-900 p-3.5 rounded-xl border border-charcoal-700">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-white text-sm">MOZAI Platform</span>
+                                <span class="text-[10px] bg-charcoal-700 text-gray-300 px-2 py-0.5 rounded">Hackathon Finalist</span>
+                            </div>
+                            <p class="text-gray-400 leading-relaxed">Served as team leader building an AI-powered regional language misinformation and news detection prototype during the ForgeAI hackathon at VIT Vellore, advancing successfully to the final rounds.</p>
+                        </div>
+                    </div>
+                `
+            },
+            'ideas': {
+                title: 'Upcoming Ideas & R&D',
+                icon: 'fa-lightbulb',
+                html: `
+                    <div class="space-y-3 text-xs text-gray-300">
+                        <div class="bg-charcoal-900 p-3.5 rounded-xl border border-charcoal-700">
+                            <div class="font-bold text-white text-sm mb-1">OmniCharge Smart Desk</div>
+                            <p class="text-gray-400 leading-relaxed">Conceptualizing an autonomous magnetic wireless charging desktop system designed for seamless ambient multi-device power delivery without clutter.</p>
+                        </div>
+                        <div class="bg-charcoal-900 p-3.5 rounded-xl border border-charcoal-700">
+                            <div class="font-bold text-white text-sm mb-1">Biometric Lab Security Vault</div>
+                            <p class="text-gray-400 leading-relaxed">Developing an optical fingerprint sensor-secured hardware enclosure prototype integrated with microcontrollers for ultra-secure laboratory sample management.</p>
+                        </div>
+                    </div>
+                `
+            },
+            'education': {
+                title: 'Education & Leadership',
+                icon: 'fa-graduation-cap',
+                html: `
+                    <div class="space-y-3 text-xs text-gray-300">
+                        <div class="bg-charcoal-900 p-3.5 rounded-xl border border-charcoal-700">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-white text-sm">VIT Vellore</span>
+                                <span class="text-terracotta-light accent-text font-mono font-bold">9.4 CGPA</span>
+                            </div>
+                            <p class="text-gray-400">B.Tech in Computer Science Engineering (Cybersecurity Specialization), 2022 - 2026.</p>
+                        </div>
+                        <div class="bg-charcoal-900 p-3.5 rounded-xl border border-charcoal-700">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-white text-sm">Manav Sthali School, Delhi</span>
+                                <span class="text-terracotta-light accent-text font-mono font-bold">93.3%</span>
+                            </div>
+                            <p class="text-gray-400 mb-1">CBSE Class 12 PCM Board Examinations.</p>
+                            <p class="text-terracotta-light accent-text font-medium">✓ Student Council Member (Grades 11 & 12) & School Management Team Lead.</p>
+                        </div>
+                    </div>
+                `
+            },
+            'skills': {
+                title: 'Tech Stack & Skills',
+                icon: 'fa-code',
+                html: `
+                    <div class="space-y-3 text-xs text-gray-300">
+                        <p>Core programming languages, frameworks, and security disciplines practiced:</p>
+                        <div class="flex flex-wrap gap-2 pt-1">
+                            <span class="bg-charcoal-900 px-3 py-1.5 rounded-lg border border-charcoal-700 font-mono">C++</span>
+                            <span class="bg-charcoal-900 px-3 py-1.5 rounded-lg border border-charcoal-700 font-mono">Python</span>
+                            <span class="bg-charcoal-900 px-3 py-1.5 rounded-lg border border-charcoal-700 font-mono">JavaScript</span>
+                            <span class="bg-charcoal-900 px-3 py-1.5 rounded-lg border border-charcoal-700 font-mono">HTML5 / CSS3</span>
+                            <span class="bg-charcoal-900 px-3 py-1.5 rounded-lg border border-charcoal-700 font-mono">Penetration Testing</span>
+                            <span class="bg-charcoal-900 px-3 py-1.5 rounded-lg border border-charcoal-700 font-mono">Bug Bounty Hunting</span>
+                            <span class="bg-charcoal-900 px-3 py-1.5 rounded-lg border border-charcoal-700 font-mono">Next.js & React</span>
+                            <span class="bg-charcoal-900 px-3 py-1.5 rounded-lg border border-charcoal-700 font-mono">Git & Vercel</span>
+                        </div>
+                    </div>
+                `
+            },
+            'languages': {
+                title: 'Spoken Languages',
+                icon: 'fa-language',
+                html: `
+                    <div class="space-y-3 text-xs text-gray-300">
+                        <div class="bg-charcoal-900 p-3 rounded-xl border border-charcoal-700">
+                            <div class="flex justify-between mb-1"><span class="font-bold text-white">English</span><span class="text-terracotta-light accent-text">Fluent</span></div>
+                            <div class="w-full bg-charcoal-800 h-2 rounded-full overflow-hidden"><div class="bg-terracotta accent-bg h-full w-full"></div></div>
+                        </div>
+                        <div class="bg-charcoal-900 p-3 rounded-xl border border-charcoal-700">
+                            <div class="flex justify-between mb-1"><span class="font-bold text-white">Hindi</span><span class="text-terracotta-light accent-text">Fluent (Native)</span></div>
+                            <div class="w-full bg-charcoal-800 h-2 rounded-full overflow-hidden"><div class="bg-terracotta accent-bg h-full w-full"></div></div>
+                        </div>
+                        <div class="bg-charcoal-900 p-3 rounded-xl border border-charcoal-700">
+                            <div class="flex justify-between mb-1"><span class="font-bold text-white">French</span><span class="text-gray-400">Learning (In Progress)</span></div>
+                            <div class="w-full bg-charcoal-800 h-2 rounded-full overflow-hidden"><div class="bg-terracotta-light accent-bg h-full w-[35%]"></div></div>
+                        </div>
+                    </div>
+                `
+            },
+            'closing': {
+                title: 'A Heartfelt Thank You',
+                icon: 'fa-heart',
+                html: `
+                    <div class="text-center space-y-3">
+                        <i class="fa-solid fa-mug-hot text-2xl text-terracotta accent-text"></i>
+                        <p class="text-xs text-gray-300 leading-relaxed italic">
+                            "Thank you so much for stopping by and exploring my work. Building software, securing systems, and bringing creative engineering ideas to life is a journey I deeply love. If you're working on something exciting or just want to connect over code and security, my inbox is always open!"
+                        </p>
+                        <p class="text-xs font-bold text-terracotta-light accent-text">— Jai Singh Shaundh ❤️</p>
+                    </div>
+                `
+            }
         };
 
-        const observer = new IntersectionObserver((entries, observer) => {
+        // Modal Pop-up Handlers
+        function openDetailModal(key) {
+            const data = modalContentData[key];
+            if (!data) return;
+            const modalBody = document.getElementById('modal-body');
+            modalBody.innerHTML = `
+                <div class="flex items-center gap-2 mb-3 pb-2 border-b border-charcoal-700">
+                    <i class="fa-solid ${data.icon} text-terracotta accent-text text-base"></i>
+                    <h3 class="text-base font-bold text-white">${data.title}</h3>
+                </div>
+                ${data.html}
+            `;
+            const modal = document.getElementById('detail-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('is-open');
+        }
+
+        function closeDetailModal() {
+            const modal = document.getElementById('detail-modal');
+            modal.classList.remove('is-open');
+            setTimeout(() => {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+            }, 250);
+        }
+
+        // Theme Switcher Logic
+        function toggleTheme() {
+            const body = document.getElementById('body');
+            const themeText = document.getElementById('theme-text');
+            const sysLabel = document.getElementById('sys-label');
+            const paletteIcon = document.getElementById('palette-icon');
+            
+            body.classList.toggle('cyber-mode');
+            
+            if (body.classList.contains('cyber-mode')) {
+                themeText.innerText = 'Cyber Neon';
+                sysLabel.innerText = 'SYS.PROFILE // CYBER_EDITION';
+                paletteIcon.style.color = '#00F0FF';
+            } else {
+                themeText.innerText = 'Terracotta';
+                sysLabel.innerText = 'SYS.PROFILE // S-TIER';
+                paletteIcon.style.color = '#C85A32';
+            }
+        }
+
+        // Contact Modal Logic
+        function openContactModal() {
+            const modal = document.getElementById('contact-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('is-open');
+        }
+
+        function closeContactModal() {
+            const modal = document.getElementById('contact-modal');
+            modal.classList.remove('is-open');
+            setTimeout(() => {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+            }, 250);
+        }
+
+        function sendMsg() {
+            const name = document.getElementById('visitor-name').value;
+            const msg = document.getElementById('visitor-msg').value;
+            if(!name || !msg) {
+                alert('Please fill in both fields!');
+                return;
+            }
+            window.location.href = `mailto:jaisinghshaundh@gmail.com?subject=Portfolio Contact from ${encodeURIComponent(name)}&body=${encodeURIComponent(msg)}`;
+            closeContactModal();
+        }
+
+        // Scroll-triggered animations & language bars
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.querySelectorAll('.lang-fill').forEach(bar => {
-                        bar.style.width = bar.getAttribute('data-width');
-                    });
-                    observer.unobserve(entry.target);
+                    entry.target.classList.add('is-visible');
+                    // Trigger language bars if within section
+                    if (entry.target.id === 'languages-section') {
+                        entry.target.querySelectorAll('.lang-fill').forEach(bar => {
+                            bar.style.width = bar.getAttribute('data-width');
+                        });
+                    }
                 }
             });
         }, observerOptions);
 
         window.addEventListener('DOMContentLoaded', () => {
-            const langSection = document.getElementById('languages-section');
-            if (langSection) {
-                observer.observe(langSection);
-            }
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+                scrollObserver.observe(el);
+            });
+            const langSec = document.getElementById('languages-section');
+            if (langSec) scrollObserver.observe(langSec);
         });
 
+        // Terminal Script
         const terminalOutput = document.getElementById('terminal-output');
         const terminalInput = document.getElementById('terminal-input');
 
@@ -376,7 +755,7 @@
         };
 
         function printToTerminal(cmd, res) {
-            terminalOutput.innerHTML += `<p class="text-terracotta-light">&gt; ${cmd}</p>`;
+            terminalOutput.innerHTML += `<p class="text-terracotta-light accent-text">&gt; ${cmd}</p>`;
             terminalOutput.innerHTML += `<p class="text-gray-300">${res}</p>`;
             terminalOutput.scrollTop = terminalOutput.scrollHeight;
         }
@@ -386,7 +765,7 @@
             if (!val) return;
             
             if (val === 'clear') {
-                terminalOutput.innerHTML = '<p class="text-terracotta-light">&gt; Terminal cleared.</p>';
+                terminalOutput.innerHTML = '<p class="text-terracotta-light accent-text">&gt; Terminal cleared.</p>';
                 terminalInput.value = '';
                 return;
             }
